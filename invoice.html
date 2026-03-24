@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invoice - JAVIERSTORE</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f5f5f5;
+}
+
+.back-btn{
+font-weight:500;
+padding:8px 18px;
+border-radius:8px;
+}
+
+.invoice-box{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.invoice-result{
+background:#f8f9fa;
+padding:20px;
+border-radius:8px;
+white-space:pre-line;
+font-family:monospace;
+}
+
+.btn-wa{
+background:#25D366;
+color:white;
+font-weight:600;
+}
+
+.btn-wa:hover{
+background:#1ebe5d;
+color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container py-5">
+
+<a href="index.html" class="btn btn-outline-dark back-btn mb-4">
+← Kembali ke Beranda
+</a>
+
+<h2 class="mb-4 text-center">Form Pembelian JAVIERSTORE</h2>
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="invoice-box">
+
+<div class="mb-3">
+<label>Nama</label>
+<input type="text" id="nama" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Produk</label>
+<input type="text" id="produk" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>ID / Email Akun</label>
+<input type="text" id="akun" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Metode Pembayaran</label>
+<select id="pembayaran" class="form-control">
+<option>DANA</option>
+<option>OVO</option>
+<option>GOPAY</option>
+<option>Qris All Payment</option>
+</select>
+</div>
+
+<button onclick="buatInvoice()" class="btn btn-primary w-100">
+Buat Invoice
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Hasil Invoice -->
+
+<div class="row justify-content-center mt-4">
+
+<div class="col-md-6">
+
+<div class="invoice-box">
+
+<h4 class="mb-3">Invoice</h4>
+
+<div id="hasilInvoice" class="invoice-result">
+
+Isi invoice akan muncul disini
+
+</div>
+
+<div class="d-flex gap-2 mt-3">
+
+<button onclick="copyText()" class="btn btn-secondary w-50">
+Copy Teks
+</button>
+
+<button onclick="kirimWA()" class="btn btn-wa w-50">
+Kirim ke WhatsApp
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function buatInvoice(){
+
+let nama = document.getElementById("nama").value
+let produk = document.getElementById("produk").value
+let akun = document.getElementById("akun").value
+let pembayaran = document.getElementById("pembayaran").value
+
+let teks =
+`INVOICE PEMBELIAN
+
+Nama : ${nama}
+Produk : ${produk}
+ID / Email : ${akun}
+Pembayaran : ${pembayaran}
+
+Mohon diproses ya admin 🙏
+Terima kasih.`
+
+document.getElementById("hasilInvoice").innerText = teks
+
+}
+
+
+function copyText(){
+
+let teks = document.getElementById("hasilInvoice").innerText
+
+navigator.clipboard.writeText(teks)
+
+alert("Invoice berhasil di copy")
+
+}
+
+
+function kirimWA(){
+
+let teks = document.getElementById("hasilInvoice").innerText
+
+let url = "https://wa.me/6285703116360?text=" + encodeURIComponent(teks)
+
+window.open(url)
+
+}
+
+</script>
+
+</body>
+</html>
